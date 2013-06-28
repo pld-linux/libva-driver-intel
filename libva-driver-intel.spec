@@ -11,7 +11,7 @@ URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	libdrm-devel >= 2.4.23
+BuildRequires:	libdrm-devel >= 2.4.45
 BuildRequires:	libva-devel >= 1.2.0
 BuildRequires:	libva-drm-devel >= 1.2.0
 BuildRequires:	libva-wayland-devel >= 1.2.0
@@ -22,7 +22,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(libva) >= 0.32.0
 # wayland-client
 BuildRequires:	wayland-devel
-Requires:	libdrm >= 2.4.23
+Requires:	libdrm >= 2.4.45
 Requires:	libva >= 1.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
