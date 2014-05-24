@@ -1,12 +1,12 @@
 Summary:	VA driver for Intel G45 and HD Graphics family
 Summary(pl.UTF-8):	Sterownik VA do kart Intela z rodziny G45 i HD Graphics
 Name:		libva-driver-intel
-Version:	1.3.0
+Version:	1.3.1
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	http://www.freedesktop.org/software/vaapi/releases/libva-intel-driver/libva-intel-driver-%{version}.tar.bz2
-# Source0-md5:	26d5cb188b93e415e70ee662aad924f1
+# Source0-md5:	0d6f1ca655130bac8edf3fc8a8dada48
 URL:		http://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	autoconf >= 2.57
