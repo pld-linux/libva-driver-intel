@@ -19,7 +19,7 @@ BuildRequires:	libva-x11-devel >= 1.5.0
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
 # API version, not just package version
-BuildRequires:	pkgconfig(libva) >= 0.36
+BuildRequires:	pkgconfig(libva) >= 0.37
 # wayland-client
 BuildRequires:	wayland-devel
 Requires:	libdrm >= 2.4.45
