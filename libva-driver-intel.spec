@@ -1,18 +1,18 @@
-%define	libva_req	1.7.0
+%define	libva_req	1.7.1
 Summary:	VA driver for Intel G45 and HD Graphics family
 Summary(pl.UTF-8):	Sterownik VA do kart Intela z rodziny G45 i HD Graphics
 Name:		libva-driver-intel
-Version:	1.7.0
+Version:	1.7.1
 Release:	1
 License:	MIT
 Group:		Libraries
 Source0:	https://www.freedesktop.org/software/vaapi/releases/libva-intel-driver/libva-intel-driver-%{version}.tar.bz2
-# Source0-md5:	00619c393e0c9c74b205d9adf69b68db
+# Source0-md5:	91368b4647a628e8b1fe24438dd51598
 URL:		https://www.freedesktop.org/wiki/Software/vaapi
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	libdrm-devel >= 2.4.45
+BuildRequires:	libdrm-devel >= 2.4.52
 BuildRequires:	libva-devel >= %{libva_req}
 BuildRequires:	libva-drm-devel >= %{libva_req}
 BuildRequires:	libva-wayland-devel >= %{libva_req}
@@ -23,7 +23,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	pkgconfig(libva) >= 0.39
 # wayland-client
 BuildRequires:	wayland-devel
-Requires:	libdrm >= 2.4.45
+Requires:	libdrm >= 2.4.52
 Requires:	libva >= %{libva_req}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
