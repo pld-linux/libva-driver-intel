@@ -1,33 +1,35 @@
-%define	libva_req	1.7.3
+%define	libva_ver	2.1.0
 Summary:	VA driver for Intel G45 and HD Graphics family
 Summary(pl.UTF-8):	Sterownik VA do kart Intela z rodziny G45 i HD Graphics
 Name:		libva-driver-intel
-Version:	2.2.0
+Version:	2.3.0
 Release:	1
 License:	MIT
 Group:		Libraries
+#Source0Download: https://github.com/intel/intel-vaapi-driver/releases
 Source0:	https://github.com/intel/intel-vaapi-driver/releases/download/%{version}/intel-vaapi-driver-%{version}.tar.bz2
-# Source0-md5:	e296c52fa1cb5c3d53a6cc994ce0a66c
+# Source0-md5:	9d835d1a3f7a9ef394f0f4c348cd4b3e
 URL:		https://01.org/linuxmedia
 BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	libdrm-devel >= 2.4.52
-BuildRequires:	libva-devel >= %{libva_req}
-BuildRequires:	libva-drm-devel >= %{libva_req}
-BuildRequires:	libva-wayland-devel >= %{libva_req}
-BuildRequires:	libva-x11-devel >= %{libva_req}
+BuildRequires:	libva-devel >= %{libva_ver}
+BuildRequires:	libva-drm-devel >= %{libva_ver}
+BuildRequires:	libva-wayland-devel >= %{libva_ver}
+BuildRequires:	libva-x11-devel >= %{libva_ver}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-# API version, not just package version
-BuildRequires:	pkgconfig(libva) >= 0.39.4
+# VA-API version, not just package version
+BuildRequires:	pkgconfig(libva) >= 1.1.0
 # wayland-client
-BuildRequires:	wayland-devel
+BuildRequires:	wayland-devel >= 1.11.0
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXfixes-devel
 Requires:	libdrm >= 2.4.52
-Requires:	libva >= %{libva_req}
+Requires:	libva >= %{libva_ver}
+Requires:	wayland >= 1.11.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
