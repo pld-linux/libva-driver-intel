@@ -10,7 +10,6 @@ Group:		Libraries
 Source0:	https://github.com/intel/intel-vaapi-driver/releases/download/%{version}/intel-vaapi-driver-%{version}.tar.bz2
 # Source0-md5:	073fce0f409559109ad2dd0a6531055d
 URL:		https://01.org/linuxmedia
-BuildRequires:	Mesa-libEGL-devel
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	libdrm-devel >= 2.4.52
