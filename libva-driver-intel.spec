@@ -114,7 +114,14 @@ Header files for cmrtlib library.
 %build
 mkdir -p build
 cd build
+%ifnarch %{x8664}
+CXXFLAGS="%{rpmcxxflags} -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+ARCH=32
+%else
+ARCH=64
+%endif
 %cmake ../ \
+	-DARCH=$ARCH \
 	%{cmake_on_off nonfree_shaders ENABLE_NONFREE_KERNELS} \
 	%{cmake_on_off cmrtlib BUILD_CMRTLIB}
 
