@@ -34,6 +34,7 @@ Requires:	libdrm >= 2.4.52
 Requires:	libva >= %{libva_ver}
 Requires:	wayland >= 1.11.0
 Suggests:	igfxcmrt
+ExclusiveArch:	%{x8664} %{ix86}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
