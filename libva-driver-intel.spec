@@ -1,18 +1,18 @@
 #
 # Conditional build:
-%bcond_without	nonfree_shaders		# Don't use closed source pre-built binary shaders (kernels)
-%bcond_without	cmrtlib			# Build and Install cmrtlib together with media driver
+%bcond_without	nonfree_shaders		# closed source pre-built binary shaders (kernels)
+%bcond_without	cmrtlib			# cmrtlib packaging beside the media driver
 #
 %define		libva_ver	2.22.0
 Summary:	VA driver for Intel GEN Graphics hardware
 Summary(pl.UTF-8):	Sterownik VA do kart Intela opartych na GEN
 Name:		libva-driver-intel
-Version:	25.2.6
+Version:	25.3.4
 Release:	1
 License:	MIT, BSD (see LICENSE.md)
 Group:		Libraries
 Source0:	https://github.com/intel/media-driver/archive/intel-media-%{version}/intel-vaapi-driver-%{version}.tar.gz
-# Source0-md5:	86d04d3795985859ad5e59e1d2d8ac22
+# Source0-md5:	fd6513f1fdcea358f0ca482fa2e363dc
 URL:		https://01.org/linuxmedia
 BuildRequires:	cmake >= 3.12
 BuildRequires:	intel-gmmlib-devel >= 22.8.0
@@ -24,6 +24,7 @@ BuildRequires:	libva-x11-devel >= %{libva_ver}
 BuildRequires:	pkgconfig
 # VA-API version, not just package version
 BuildRequires:	pkgconfig(libva) >= 1.1.0
+BuildRequires:	rpmbuild(macros) >= 2.047
 # wayland-client
 BuildRequires:	wayland-devel >= 1.11.0
 BuildRequires:	xorg-lib-libICE-devel
@@ -44,7 +45,6 @@ decoding, encoding, and video post processing for GEN based graphics
 hardware.
 
 Supported Platforms:
-
 - BDW (Broadwell)
 - SKL (Skylake)
 - BXTx (BXT: Broxton, APL: Apollo Lake, GLK: Gemini Lake)
@@ -64,11 +64,10 @@ Supported Platforms:
 %description -l pl.UTF-8
 Intel(R) Media Driver dla VAAPI to nowy sterownik VA-API (Video
 Acceleration API) w przestrzeni użytkownika, wspierający sprzętowe
-dekodowanie, enkodowanie i post processing video dla sprzetu opartego
+dekodowanie, enkodowanie i post processing video dla sprzętu opartego
 na GEN.
 
-Wspierane platformy:
-
+Obsługiwane platformy:
 - BDW (Broadwell)
 - SKL (Skylake)
 - BXTx (BXT: Broxton, APL: Apollo Lake, GLK: Gemini Lake)
@@ -87,6 +86,7 @@ Wspierane platformy:
 
 %package -n igfxcmrt
 Summary:	Library for executing user-owned GPU kernels on Intel VA-API render engine
+Summary(pl.UTF-8):	Biblioteka do uruchamiania jąder GPU użytkownika na silniku renderującym Intel VA-API
 License:	MIT
 Group:		Libraries
 
@@ -97,17 +97,31 @@ kernels and allocate the resources. It provides a set of APIs for user
 to call directly from application.
 
 This cmrtlib library is a separate effort from a similar library
-(https://github.com/intel/cmrt). They may provide the same
+(<https://github.com/intel/cmrt>). They may provide the same
 functionalities but this is not intended to replace the other.
+
+%description -n igfxcmrt -l pl.UTF-8
+Biblioteka uruhcomieniowa potrzebna, kiedy użytkownik chce uruchomić
+własne jądra GPU na silniku renderującym. Wywołuje sterownik iHD media
+w celu załadowania jąder i przydzielenia zasobów. Zapewnia API do
+wywoływania bezpośrednio z aplikacji użytkownika.
+
+Biblioteka cmrtlib to biblioteka osobna od podobnej
+(<https://github.com/intel/cmrt>). Zapewniają tę samą funkcjonalność,
+ale nie mają na celu zastąpienia drugiej.
 
 %package -n igfxcmrt-devel
 Summary:	Header files for cmrtlib library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki cmrtlib
 License:	MIT
 Group:		Development/Libraries
 Requires:	igfxcmrt = %{version}-%{release}
 
 %description -n igfxcmrt-devel
 Header files for cmrtlib library.
+
+%description -n igfxcmrt-devel -l pl.UTF-8
+Pliki nagłówkowe biblioteki cmrtlib.
 
 %prep
 %setup -q -n media-driver-intel-media-%{version}
@@ -123,8 +137,8 @@ ARCH=64
 %endif
 %cmake ../ \
 	-DARCH=$ARCH \
-	%{cmake_on_off nonfree_shaders ENABLE_NONFREE_KERNELS} \
-	%{cmake_on_off cmrtlib BUILD_CMRTLIB}
+	-DENABLE_NONFREE_KERNELS=%{__ON_OFF nonfree_shaders} \
+	-DBUILD_CMRTLIB=%{__ON_OFF cmrtlib}
 
 %{__make}
 
@@ -137,8 +151,8 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post -n igfxcmrt -p /sbin/ldconfig
-%postun -n igfxcmrt -p /sbin/ldconfig
+%post	-n igfxcmrt -p /sbin/ldconfig
+%postun	-n igfxcmrt -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
@@ -148,8 +162,8 @@ rm -rf $RPM_BUILD_ROOT
 %files -n igfxcmrt
 %defattr(644,root,root,755)
 %doc cmrtlib/README.md
-%ghost %{_libdir}/libigfxcmrt.so.7
 %{_libdir}/libigfxcmrt.so.*.*.*
+%ghost %{_libdir}/libigfxcmrt.so.7
 
 %files -n igfxcmrt-devel
 %defattr(644,root,root,755)
