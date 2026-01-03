@@ -129,8 +129,9 @@ Pliki nagłówkowe biblioteki cmrtlib.
 %build
 mkdir -p build
 cd build
+CXXFLAGS="%{rpmcxxflags} -Wno-error=array-bounds"
 %ifnarch %{x8664}
-CXXFLAGS="%{rpmcxxflags} -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+CXXFLAGS="$CXXFLAGS -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
 ARCH=32
 %else
 ARCH=64
