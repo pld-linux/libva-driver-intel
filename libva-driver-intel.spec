@@ -8,7 +8,7 @@ Summary:	VA driver for Intel GEN Graphics hardware
 Summary(pl.UTF-8):	Sterownik VA do kart Intela opartych na GEN
 Name:		libva-driver-intel
 Version:	25.3.4
-Release:	1
+Release:	2
 License:	MIT, BSD (see LICENSE.md)
 Group:		Libraries
 Source0:	https://github.com/intel/media-driver/archive/intel-media-%{version}/intel-vaapi-driver-%{version}.tar.gz
