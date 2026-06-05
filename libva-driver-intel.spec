@@ -3,20 +3,22 @@
 %bcond_without	nonfree_shaders		# closed source pre-built binary shaders (kernels)
 %bcond_without	cmrtlib			# cmrtlib packaging beside the media driver
 #
-%define		libva_ver	2.22.0
+%define		libva_ver	2.23.0
 Summary:	VA driver for Intel GEN Graphics hardware
 Summary(pl.UTF-8):	Sterownik VA do kart Intela opartych na GEN
 Name:		libva-driver-intel
-Version:	25.3.4
-Release:	3
+Version:	26.1.5
+Release:	1
 License:	MIT, BSD (see LICENSE.md)
 Group:		Libraries
+#Source0Download: https://github.com/intel/media-driver/releases
 Source0:	https://github.com/intel/media-driver/archive/intel-media-%{version}/intel-vaapi-driver-%{version}.tar.gz
-# Source0-md5:	fd6513f1fdcea358f0ca482fa2e363dc
+# Source0-md5:	6d921cb2d5197106b6e708b379eb1084
 URL:		https://01.org/linuxmedia
 BuildRequires:	cmake >= 3.12
-BuildRequires:	intel-gmmlib-devel >= 22.8.0
+BuildRequires:	intel-gmmlib-devel >= 22.10.0
 BuildRequires:	libdrm-devel >= 2.4.52
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libva-devel >= %{libva_ver}
 BuildRequires:	libva-drm-devel >= %{libva_ver}
 BuildRequires:	libva-wayland-devel >= %{libva_ver}
@@ -158,7 +160,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc LICENSE.md README.md security.md
-%attr(755,root,root) %{_libdir}/libva/dri/iHD_drv_video.so
+%{_libdir}/libva/dri/iHD_drv_video.so
 
 %files -n igfxcmrt
 %defattr(644,root,root,755)
